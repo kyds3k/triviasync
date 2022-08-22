@@ -15,6 +15,10 @@ module.exports = {
     publicPath: '/',
   },
 
+  experiments: {
+    topLevelAwait: true
+  },
+
   // Customize the webpack build process
   plugins: [
     // Removes/cleans build folders and unused assets when rebuilding
