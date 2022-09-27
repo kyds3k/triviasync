@@ -52,6 +52,25 @@ async function populateBoard() {
   }, 250);
 }
 
+async function deleteBoard() {
+  const keepPlayers = await keepScorePlayers();
+  forEachWithDelay(keepPlayers, (team) => {
+    fetch(`https://keepthescore.co/api/emiktfvokje/player/${team.id}`, {
+      method: 'DELETE', 
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });    
+  });
+}
+
 async function syncScores() {
   const ratData = await ratTrap();
   const keepPlayers = await keepScorePlayers();
@@ -106,23 +125,6 @@ async function syncScores() {
         syncIndex++;
       }
     }
-
-
-    // fetch('https://keepthescore.co/api/emiktfvokje/player/', {
-    //   method: 'POST', // or 'PUT'
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   console.log('Success:', data);
-    // })
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // });
-
   }, 1000);
 }
 
@@ -150,9 +152,15 @@ async function keepScorePlayers() {
 
 //populateBoard();
 
+const deleteButton = document.querySelector('.delete');
 const logButton = document.querySelector('.log');
 const populateButton = document.querySelector('.populate');
 const syncButton = document.querySelector('.sync');
+
+deleteButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  deleteBoard();
+});
 
 logButton.addEventListener('click', (e) => {
   e.preventDefault();

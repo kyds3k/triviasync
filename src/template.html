@@ -6,13 +6,48 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      #root {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .myButton {
+        box-shadow:inset 0px -3px 7px 0px #29bbff;
+        background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+        background-color:#2dabf9;
+        border-radius:3px;
+        border:1px solid #0b0e07;
+        display:block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        padding:9px 23px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #263666;
+        margin-bottom: 20px;
+      }
+      .myButton:hover {
+        background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+        background-color:#0688fa;
+      }
+      .myButton:active {
+        position:relative;
+        top:1px;
+      }
+
+    </style>
   </head>
 
   <body>
     <div id="root">
-      <button class="log">Log data</button>
-      <button class="populate">Populate board</button>
-      <button class="sync">Sync scores</button>
+      <button class="myButton delete">Delete all teams from scoreboard</button>
+      <button class="myButton log">Log data</button>
+      <button class="myButton populate">Populate board</button>
+      <button class="myButton sync">Sync scores</button>
     </div>
   </body>
 </html>
