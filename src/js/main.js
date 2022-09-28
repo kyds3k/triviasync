@@ -71,6 +71,27 @@ async function deleteBoard() {
   });
 }
 
+async function addTeam(teamName) {
+  const data = {
+    "name": teamName
+  }
+  fetch('https://keepthescore.co/api/emiktfvokje/player/', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
+}
+
 async function syncScores() {
   const ratData = await ratTrap();
   const keepPlayers = await keepScorePlayers();
@@ -156,6 +177,7 @@ const deleteButton = document.querySelector('.delete');
 const logButton = document.querySelector('.log');
 const populateButton = document.querySelector('.populate');
 const syncButton = document.querySelector('.sync');
+const addButton = document.querySelector('.add');
 
 deleteButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -176,3 +198,10 @@ syncButton.addEventListener('click', (e) => {
   e.preventDefault();
   syncScores();
 })
+
+addButton.addEventListener('click', (e) => {
+  e.preventDefault;
+  const teamName = document.querySelector('#team_name').value;
+  addTeam(teamName);
+  document.querySelector('#team_name').value = '';
+});
